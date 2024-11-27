@@ -9,6 +9,9 @@
     <div class="min-h-screen flex justify-center items-center">
         <div class="max-w-md w-full">
             <form action="/auth/login" method="POST" class="max-w-sm mx-auto p-6 bg-white rounded-lg shadow-lg">
+                <% if (csrfToken) { %>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% } %>
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
                     <input 

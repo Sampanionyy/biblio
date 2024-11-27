@@ -17,6 +17,7 @@
                 <% if (csrfToken) { %>
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <% } %>
+
                 <div class="mb-4">
                     <label for="username" class="block text-gray-700 font-medium">Username:</label>
                     <input type="text" id="username" name="username" class="w-full p-3 border border-gray-300 rounded-lg" required>

@@ -4,6 +4,12 @@ const Category = require('./entities/Category');
 const User = require('./entities/User');
 
 
-sequelize.sync().then(() => {
-    console.log('Database synchronized');
-});
+(async () => {
+    try {
+        await sequelize.sync();
+        console.log('Database synchronized');
+    } catch (error) {
+        console.error('Error synchronizing the database:', error);
+    }
+})();
+

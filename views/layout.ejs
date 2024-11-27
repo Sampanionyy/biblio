@@ -7,21 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
-    <!-- Sidebar -->
-    <div class="flex">
-        <div class="w-64 bg-blue-800 text-white h-screen p-6">
-            <h2 class="text-xl font-semibold mb-4">Sidebar</h2>
-            <ul>
-                <li><a href="/products" class="block py-2">Products</a></li>
-                <li><a href="/categories" class="block py-2">Categories</a></li>
-                {# <li><a href="/auth/register" class="block py-2">Register</a></li> #}
-            </ul>
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Online Library</h1>
+            <nav>
+                <a href="/books" class="text-white mx-2 hover:underline">Books</a>
+                <a href="/categories" class="text-white mx-2 hover:underline">Categories</a>
+                <a href="/account" class="text-white mx-2 hover:underline">My Account</a>
+                <a href="/auth/logout" class="text-white mx-2 hover:underline">Logout</a>
+            </nav>
         </div>
-
-        <!-- Main content -->
-        <div class="flex-1 p-6">
-            <%- body %>  <!-- C'est ici que le contenu de chaque page sera rendu -->
+    </header>
+    <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow">
+        <%- body %>
+    </main>
+    <footer class="fixed w-full bottom-0 bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>© 2024 Online Library. All rights reserved.</p>
         </div>
-    </div>
+    </footer>
 </body>
 </html>

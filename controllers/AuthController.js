@@ -34,10 +34,12 @@ const login = async (req, res) => {
         });
 
         res.cookie('jwt', token, { httpOnly: true });
-        res.status(200).json({ message: 'Login successful', token });
+        // Redirection vers la page d'accueil
+        res.redirect('/home');
     } catch (err) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 module.exports = { register, login };
