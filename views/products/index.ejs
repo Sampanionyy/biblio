@@ -1,29 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="/css/styles.css" rel="stylesheet">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Products</title>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <!-- Header -->
+    <div class="bg-blue-500 text-white p-6 shadow-md rounded-b-lg mb-6">
+        <h1 class="text-3xl font-bold text-center">Products</h1>
+    </div>
+    <form class="p-6 flex justify-end" action="/categories/" method="GET">
+        <button 
+            class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50" 
+            type="submit" 
+        >
+            See categories
+        </button>
+    </form>
+    <!-- Table -->
+    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+        <table class="min-w-full table-auto text-left border-collapse">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-lg font-semibold text-gray-600">Product Name</th>
+                    <th class="px-6 py-3 text-lg font-semibold text-gray-600">Price</th>
+                    <th class="px-6 py-3 text-lg font-semibold text-gray-600">Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr class="border-b hover:bg-gray-100">
+                        <td class="px-6 py-3 text-gray-700"><%= product.name %></td>
+                        <td class="px-6 py-3 text-gray-700">$<%= product.price %></td>
+                        <td class="px-6 py-3 text-gray-500"><%= product.category ? product.category.name : 'No category' %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 
-<body>
-  <h1>Products</h1>
-  <ul>
-    <% products.forEach(product => { %>
-    <li><%= product.name %> - $<%= product.price %> (<%= product.category ? product.category.name : 'No category' %>)</li>
-    <% }) %>
-  </ul>
-  <form action="/products" method="POST">
-    <input type="text" name="name" placeholder="Product Name">
-    <input type="number" name="price" placeholder="Product Price">
-    <select name="categoryId">
-      <% categories.forEach(category => { %>
-      <option value="<%= category.id %>"><%= category.name %></option>
-      <% }) %>
-    </select>
-    <button type="submit">Add Product</button>
-  </form>
+    <!-- Add Product Form -->
+    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+        <form action="/products" method="POST" class="space-y-4">
+            <input type="text" name="name" placeholder="Product Name" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            <input type="number" name="price" placeholder="Product Price" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+            <select name="categoryId" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>">
+                        <%= category.name %>
+                    </option>
+                <% }) %>
+            </select>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Add Product
+            </button>
+        </form>
+    </div>
 </body>
-
 </html>
