@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="/css/styles.css" rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+</head>
+
+<body>
+  <h1>Products</h1>
+  <ul>
+    <% products.forEach(product => { %>
+    <li><%= product.name %> - $<%= product.price %> (<%= product.category ? product.category.name : 'No category' %>)</li>
+    <% }) %>
+  </ul>
+  <form action="/products" method="POST">
+    <input type="text" name="name" placeholder="Product Name">
+    <input type="number" name="price" placeholder="Product Price">
+    <select name="categoryId">
+      <% categories.forEach(category => { %>
+      <option value="<%= category.id %>"><%= category.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add Product</button>
+  </form>
+</body>
+
+</html>
