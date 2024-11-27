@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <!-- Sidebar -->
+    <div class="flex">
+        <div class="w-64 bg-blue-800 text-white h-screen p-6">
+            <h2 class="text-xl font-semibold mb-4">Sidebar</h2>
+            <ul>
+                <li><a href="/products" class="block py-2">Products</a></li>
+                <li><a href="/categories" class="block py-2">Categories</a></li>
+                {# <li><a href="/auth/register" class="block py-2">Register</a></li> #}
+            </ul>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 p-6">
+            <%- body %>  <!-- C'est ici que le contenu de chaque page sera rendu -->
+        </div>
+    </div>
+</body>
+</html>

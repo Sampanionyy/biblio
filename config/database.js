@@ -1,23 +1,9 @@
-const { Sequelize } = require("sequelize");
-
-const sequelize = new Sequelize("archijs", "root", "", {
-  host: "localhost",
-  dialect: "mysql",
-});
-
-// Tester la connexion
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection to the database has been established successfully.");
-  })
-  .catch((error) => {
-    console.error("Unable to connect to the database:", error);
-  });
-
-// Synchroniser la base de données
-sequelize.sync({ force: true }).then(() => {
-  console.log("Database synchronized");
+const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
+dotenv.config();
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
+    dialect: 'mysql',
 });
 
 module.exports = sequelize;

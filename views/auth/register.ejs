@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Lien vers le fichier CSS de Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="min-h-screen flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h1 class="text-2xl font-semibold text-center mb-6 text-gray-800">Register</h1>
+
+            <form action="/auth/register" method="POST">
+                <% if (csrfToken) { %>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% } %>
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 font-medium">Username:</label>
+                    <input type="text" id="username" name="username" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 font-medium">Email:</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 font-medium">Password:</label>
+                    <input type="password" id="password" name="password" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-200">
+                    Register
+                </button>
+                <a 
+                    href="/auth/login" 
+                    class="flex justify-center text-sm text-gray-700 mt-4 cursor-pointer"
+                >
+                    <span>Already have an account?</span>
+                </a>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
