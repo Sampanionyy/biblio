@@ -46,6 +46,27 @@ app.use((err, req, res, next) => {
     res.status(403).send('Form tampered with');
 });
 
+const authenticateUser = (req, res, next) => {
+    const token = req.cookies.jwt;
+    console.log('object')
+    if (!token) {
+        return next(); // If no token, proceed without user
+    }
+    
+    try {
+        console.log('aaaaaaa')
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded; // Store user in req.user
+        next();
+    } catch (err) {
+        res.clearCookie('jwt'); // Clear the cookie if token is invalid
+        next();
+    }
+};
+
+// Use the authenticateUser middleware for all routes
+app.use(authenticateUser);
+
 // Synchronisation de la BDD à chaque démarrage
 (async () => {
     try {

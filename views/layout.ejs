@@ -14,12 +14,17 @@
                 <a href="/books" class="text-white mx-2 hover:underline">Books</a>
                 <a href="/categories" class="text-white mx-2 hover:underline">Categories</a>
                 <a href="/account" class="text-white mx-2 hover:underline">My Account</a>
-                <a href="/auth/logout" class="text-white mx-2 hover:underline">Logout</a>
+                <% if (user) { %>
+                    <span class="text-white mx-2">Welcome, <%= user.email %>!</span> <!-- Affiche l'email de l'utilisateur -->
+                    <a href="/auth/logout" class="text-white mx-2 hover:underline">Logout</a>
+                <% } else { %>
+                    <a href="/auth/login" class="text-white mx-2 hover:underline">Login</a>
+                <% } %>
             </nav>
         </div>
     </header>
     <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow">
-        <%- body %>
+        <%- include(body) %>
     </main>
     <footer class="fixed w-full bottom-0 bg-gray-800 text-white p-4 mt-8">
         <div class="container mx-auto text-center">

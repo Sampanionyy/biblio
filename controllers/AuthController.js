@@ -32,8 +32,15 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN,
         });
+        console.log(token)
 
-        res.cookie('jwt', token, { httpOnly: true });
+        res.cookie('jwt', token, {
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', // Si en prod, utiliser 'secure: true'
+            maxAge: 24 * 60 * 60 * 1000, // Cookie expirant dans 24h
+            path: '/', // Le cookie sera accessible dans tout le domaine
+        });
+
         // Redirection vers la page d'accueil
         res.redirect('/home');
     } catch (err) {
