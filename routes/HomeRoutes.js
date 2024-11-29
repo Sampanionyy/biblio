@@ -5,13 +5,12 @@ const UserRepository = require('../repositories/UserRepository');
  
 router.get('/home', isAuthenticated, async (req, res) => {
     try {
-        console.log(isAuthenticated); // Assure-toi que req.user est bien peuplé par le middleware
         const user = await UserRepository.getUserById(req.user.id);
 
         res.render('layout', {
-            title: 'Online Library - Home', // Titre de la page
-            body: 'home', // Indique la vue partielle à charger dans le layout (si applicable)
-            user: user || null // Passe le user au template, ou null s'il est absent
+            title: 'Online Library - Home', 
+            body: 'home', 
+            user: user || null 
         });
     } catch (err) {
         console.error('Erreur lors du rendu de /home :', err);

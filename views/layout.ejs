@@ -11,10 +11,10 @@
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold">Online Library</h1>
             <nav>
-                <a href="/books" class="text-white mx-2 hover:underline">Books</a>
+                <a href="/products" class="text-white mx-2 hover:underline">Books</a>
                 <a href="/categories" class="text-white mx-2 hover:underline">Categories</a>
                 <a href="/account" class="text-white mx-2 hover:underline">My Account</a>
-                <% if (user) { %>
+                <% if (typeof user !== 'undefined' && user) { %>
                     <span class="text-white mx-2">Welcome, <%= user.email %>!</span> <!-- Affiche l'email de l'utilisateur -->
                     <a href="/auth/logout" class="text-white mx-2 hover:underline">Logout</a>
                 <% } else { %>

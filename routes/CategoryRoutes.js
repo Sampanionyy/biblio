@@ -8,7 +8,11 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const categories = await CategoryService.getAllCategories();
-        res.render("categories/", { categories, categories });
+        res.render('layout', {
+            title: 'Online Library - Categories', 
+            body: 'categories/index', 
+            categories: categories || null 
+        });
     } catch (error) {
         console.error("Error fetching categories:", error.message);
         res.status(500).send("Server Error");

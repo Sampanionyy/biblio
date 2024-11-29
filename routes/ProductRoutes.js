@@ -10,7 +10,12 @@ router.get("/", async (req, res) => {
     try {
         const products = await ProductService.getAllProducts();
         const categories = await CategoryService.getAllCategories();
-        res.render("products/", { products, categories });
+        res.render('layout', {
+            title: 'Online Library - Products', 
+            body: 'products/index', 
+            categories: categories || null,
+            products: products || null
+        });
     } catch (error) {
         console.error("Error fetching products:", error.message);
         res.status(500).send("Server Error");
