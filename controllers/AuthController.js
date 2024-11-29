@@ -32,21 +32,35 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN,
         });
-        console.log(token)
 
         res.cookie('jwt', token, {
             httpOnly: true, 
-            secure: process.env.NODE_ENV === 'production', // Si en prod, utiliser 'secure: true'
-            maxAge: 24 * 60 * 60 * 1000, // Cookie expirant dans 24h
-            path: '/', // Le cookie sera accessible dans tout le domaine
+            secure: process.env.NODE_ENV === 'production', 
+            maxAge: 24 * 60 * 60 * 1000, 
+            path: '/', 
         });
 
-        // Redirection vers la page d'accueil
         res.redirect('/home');
     } catch (err) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 
+const logout = (req, res) => {
+    console.log('object')
+    try {
+        // Supprimer le cookie jwt
+        res.clearCookie('jwt', {
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', 
+            path: '/', 
+        });
 
-module.exports = { register, login };
+        res.redirect('/');
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+
+module.exports = { register, login, logout };
