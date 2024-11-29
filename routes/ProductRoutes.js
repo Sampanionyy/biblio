@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
         const categories = await CategoryService.getAllCategories();
         res.render('layout', {
             title: 'Online Library - Products', 
+            second_title: 'Products', 
             body: 'products/index', 
             categories: categories || null,
             products: products || null

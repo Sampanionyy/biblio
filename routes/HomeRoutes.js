@@ -9,8 +9,23 @@ router.get('/home', isAuthenticated, async (req, res) => {
 
         res.render('layout', {
             title: 'Online Library - Home', 
+            second_title: 'Home', 
             body: 'home', 
             user: user || null 
+        });
+    } catch (err) {
+        console.error('Erreur lors du rendu de /home :', err);
+        res.status(500).send('Une erreur est survenue.'); // Gestion d'erreur serveur
+    }
+});
+
+router.get('/', async (req, res) => {
+    try {
+        res.render('layout', {
+            title: 'Online Library - Home', 
+            second_title: 'Home', 
+            body: 'home', 
+            user: null 
         });
     } catch (err) {
         console.error('Erreur lors du rendu de /home :', err);

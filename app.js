@@ -15,7 +15,6 @@ const UserRepository = require('./repositories/UserRepository');
 
 const PORT = process.env.PORT || 3000;
 
-// Middleware to authenticate user from JWT
 const authenticateUser = (req, res, next) => {
     const token = req.cookies.jwt;
     if (!token) {
@@ -45,8 +44,9 @@ app.use(authenticateUser);
 // CSRF token middleware AFTER csrf protection is set up
 app.use(async (req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
-    res.locals.user = await UserRepository.getUserById(req.user.id);
-    console.log(res.locals.user)
+    if(req.user) {
+        res.locals.user = await UserRepository.getUserById(req.user.id);
+    }
     next();
 });
 
