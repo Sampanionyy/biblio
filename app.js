@@ -48,14 +48,13 @@ app.use((err, req, res, next) => {
 
 const authenticateUser = (req, res, next) => {
     const token = req.cookies.jwt;
-    console.log('object')
     if (!token) {
         return next(); // If no token, proceed without user
     }
     
     try {
-        console.log('aaaaaaa')
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log(req.user)
         req.user = decoded; // Store user in req.user
         next();
     } catch (err) {
@@ -64,10 +63,8 @@ const authenticateUser = (req, res, next) => {
     }
 };
 
-// Use the authenticateUser middleware for all routes
 app.use(authenticateUser);
 
-// Synchronisation de la BDD à chaque démarrage
 (async () => {
     try {
         await sequelize.sync();
