@@ -56,27 +56,31 @@ router.get("/edit/:id", async (req, res) => {
         if (!category) {
             return res.status(404).send("Category not found");
         }
-        res.render("categories/update", { category }); // Affiche le formulaire avec les données de la catégorie
+        res.render('layout', {
+            title: 'Online Library - Update Category', 
+            second_title: 'Update Category', 
+            body: 'categories/update', 
+            category: category || null
+        });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
 
 router.post("/edit/:id", async (req, res) => {
-    const { id } = req.params; // Récupération de l'id depuis l'URL
-    const { name } = req.body; // Récupération du champ à mettre à jour depuis le corps de la requête
+    const { id } = req.params; 
+    const { name } = req.body; 
 
     try {
-        const category = await CategoryRepository.getCategoryById(id); // Méthode pour obtenir la catégorie
+        const category = await CategoryRepository.getCategoryById(id); 
         if (!category) {
             return res.status(404).send("Category not found");
         }
 
-        // Mise à jour des données de la catégorie
         category.name = name;
-        await category.save(); // Sauvegarde dans la base de données
+        await category.save(); 
 
-        res.redirect("/categories"); // Redirection vers la liste des catégories après mise à jour
+        res.redirect("/categories"); 
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

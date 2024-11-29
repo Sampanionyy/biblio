@@ -1,0 +1,36 @@
+<div class="flex-1 p-6">    
+    <form class="p-6 flex justify-end" action="/products/" method="GET">
+        <button 
+            class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50" 
+            type="submit" 
+        >
+            Back to list
+        </button>
+    </form>
+    <!-- Form -->
+    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
+        <form action="/products/edit/<%= product.id %>" method="POST" class="space-y-6">
+            <div>
+                <label for="name" class="block text-lg font-semibold text-gray-700">Product Name:</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>" required class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <div>
+                <label for="price" class="block text-lg font-semibold text-gray-700">Product Price:</label>
+                <input type="number" id="price" name="price" value="<%= product.price %>" required class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <div>
+                <select name="productId" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>" <%= category.id == product.categoryId ? 'selected' : ''>
+                            <%= category.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+            <input type="hidden" id="id" name="id" value="<%= product.id %>" required>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Update Product
+            </button>
+        </form>
+    </div>
+</div>
