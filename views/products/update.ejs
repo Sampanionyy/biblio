@@ -10,6 +10,9 @@
     <!-- Form -->
     <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg">
         <form action="/products/edit/<%= product.id %>" method="POST" class="space-y-6">
+            <% if (csrfToken) { %>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <% } %>
             <div>
                 <label for="name" class="block text-lg font-semibold text-gray-700">Product Name:</label>
                 <input type="text" id="name" name="name" value="<%= product.name %>" required class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -21,7 +24,7 @@
             <div>
                 <select name="productId" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     <% categories.forEach(category => { %>
-                        <option value="<%= category.id %>" <%= category.id == product.categoryId ? 'selected' : ''>
+                        <option value="<%= category.id %>" <%= category.id == product.categoryId ? 'selected' : ''%>>
                             <%= category.name %>
                         </option>
                     <% }) %>

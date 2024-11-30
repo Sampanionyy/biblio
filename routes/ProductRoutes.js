@@ -58,6 +58,7 @@ router.get("/:id", async (req, res) => {
 
 router.get("/edit/:id", async (req, res) => {
     const { id } = req.params;
+
     try {
         const product = await ProductRepository.getProductById(id); 
         const categories = await CategoryRepository.getAllCategories();
@@ -79,7 +80,7 @@ router.get("/edit/:id", async (req, res) => {
 
 router.post("/edit/:id", async (req, res) => {
     const { id } = req.params; 
-    const { name } = req.body; 
+    const { name, price, categoryId } = req.body; 
 
     try {
         const product = await ProductRepository.getProductById(id); 
@@ -88,6 +89,8 @@ router.post("/edit/:id", async (req, res) => {
         }
 
         product.name = name;
+        product.price = price;
+        product.categoryId = categoryId;
         await product.save(); 
 
         res.redirect("/products"); 
